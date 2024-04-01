@@ -8,11 +8,35 @@ spring:
           uri: lb://product-service
           predicates:
             - Path=/product/**
+              # Filtros ya establecido en Spring
+            # 1 - Header= token, \d+
+            # 2 - Method=GET, POST
+            # 3 - Query=color, green
+            # 4 - Cookie=color, blue
+          filters:
+            # Corresponde al prefijo de la clase GatewayFilterFactory, se agrego solamente al microservicio de Product
+            - name: General
+              args:
+                # Atributos de la clase Configuracion usada en GatewayFilterFactory (los valores de las cookies no deben tener espacio)
+                message: Hi! Message edited
+                cookieName: userDefault
+                cookieValue: RootUser
 
         - id: item-service
           uri: lb://item-service
           predicates:
             - Path=/item/**
+          filters:
+            # Filtros ya establecidos en Spring
+
+              # Agrega un token al request
+            - AddRequestHeader=token_request, 123456
+
+              # Agrega un token al response
+            - AddResponseHeader=token_response, 1234565
+
+              # Agrega parametros al request
+            - AddRequestParameter=name, user
 
 
 server:

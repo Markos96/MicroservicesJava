@@ -2,10 +2,13 @@ spring:
   application:
     name: product-service
 
+# Defined automatic port
+server:
+  port: ${PORT:0}
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-server:
-  port: 8080
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

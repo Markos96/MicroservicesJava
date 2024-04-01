@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @Component
 public class GlobalFilterHandler implements GlobalFilter{
 
@@ -18,12 +20,21 @@ public class GlobalFilterHandler implements GlobalFilter{
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         logger.info("Pre-filter execute: ");
+        exchange.getRequest().mutate().headers(h -> h.add("token", "123456"));
+
         return chain.filter(exchange).then(Mono.fromRunnable(()-> {
             logger.info("Post-filter execute: ");
+
+            Optional.ofNullable(exchange.getRequest().getHeaders()
+                            .getFirst("token")).ifPresent(value -> {
+                                exchange.getResponse().getHeaders().add("token", value);
+                            });
+
             exchange.getResponse().getCookies().add("color", ResponseCookie
                     .from("red")
                     .build());
             exchange.getResponse().getHeaders().setContentType(MediaType.TEXT_PLAIN);
+
         }));
     }
 }

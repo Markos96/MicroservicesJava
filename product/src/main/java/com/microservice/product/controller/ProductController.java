@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/product")
@@ -23,7 +24,13 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id){
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) throws InterruptedException {
+        if(id == 10){
+            throw new IllegalStateException("Product not found");
+        }
+        if(id.equals(7L)){
+            TimeUnit.SECONDS.sleep(5L);
+        }
         return ResponseEntity.ok(productService.getProduct(id));
     }
 

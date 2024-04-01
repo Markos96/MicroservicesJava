@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Instant;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,9 +27,10 @@ public class ItemService {
     public Item getById(Long id, Integer amount){
         Map<String, String> pathVariable = new HashMap<>();
         pathVariable.put("id", id.toString());
-        Product product = restTemplate.getForObject("http://product-service/product", Product.class, id);
+        Product product = restTemplate.getForObject("http://product-service/product/{id}", Product.class, id);
         return new Item(product, amount);
     }
+
 
     @Autowired
     public void setRestTemplate(RestTemplate restTemplate) {

@@ -19,7 +19,7 @@ public class ItemService {
 
     public List<Item> getAll(){
         List<Product> productList = Arrays.asList(restTemplate
-                .getForObject("http://localhost:8080/product", Product[].class));
+                .getForObject("http://product-service/product", Product[].class));
 
         return productList.stream()
                 .map(product -> new Item(product, 1))
@@ -29,7 +29,7 @@ public class ItemService {
     public Item getById(Long id, Integer amount){
         Map<String, String> pathVariable = new HashMap<>();
         pathVariable.put("id", id.toString());
-        Product product = restTemplate.getForObject("http://localhost:8080/product", Product.class, id);
+        Product product = restTemplate.getForObject("http://product-service/product", Product.class, id);
         return new Item(product, amount);
     }
 

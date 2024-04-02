@@ -1,8 +1,10 @@
 spring:
   application:
     name: item-service
-  config:
-    import: optional:configserver
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: item-service
 
 
 eureka:

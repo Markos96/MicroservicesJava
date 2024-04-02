@@ -28,6 +28,14 @@ public class ProductService {
                 .orElse(null);
     }
 
+    public ProductDTO save(ProductDTO productDTO){
+        return productMapper.toDTO(productRepository
+                .save(productMapper.fromDTO(productDTO)));
+    }
+
+    public void deleteById(Long id){
+        productRepository.deleteById(id);
+    }
 
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {

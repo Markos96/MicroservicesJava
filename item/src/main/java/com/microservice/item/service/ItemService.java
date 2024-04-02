@@ -3,6 +3,9 @@ package com.microservice.item.service;
 import com.microservice.item.data.model.Item;
 import com.microservice.item.data.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,6 +34,18 @@ public class ItemService {
         return new Item(product, amount);
     }
 
+    public void deleteById(Long id){
+        restTemplate.delete("http://product-service/product/{id}", id);
+    }
+
+    public Product save(Product product){
+        HttpEntity<Product> body = new HttpEntity<Product>(product);
+
+        ResponseEntity<Product> response = restTemplate.exchange("http://product-service/product",
+                HttpMethod.POST, body, Product.class);
+
+        return response.getBody();
+    }
 
     @Autowired
     public void setRestTemplate(RestTemplate restTemplate) {

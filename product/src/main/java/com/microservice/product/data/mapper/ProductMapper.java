@@ -1,7 +1,7 @@
 package com.microservice.product.data.mapper;
 
 import com.microservice.product.data.dto.ProductDTO;
-import com.microservice.product.data.model.Product;
+import com.example.common.model.entity.Product;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

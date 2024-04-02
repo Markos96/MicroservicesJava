@@ -1,15 +1,14 @@
 package com.microservice.item.service;
 
 import com.microservice.item.data.model.Item;
-import com.microservice.item.data.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import com.example.common.model.entity.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 

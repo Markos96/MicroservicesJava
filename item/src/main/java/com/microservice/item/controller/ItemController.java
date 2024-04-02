@@ -1,7 +1,7 @@
 package com.microservice.item.controller;
 
+import com.example.common.model.entity.Product;
 import com.microservice.item.data.model.Item;
-import com.microservice.item.data.model.Product;
 import com.microservice.item.service.ItemService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;

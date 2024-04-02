@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 
 @Component
-public class GlobalFilterHandler implements GlobalFilter{
+public class GlobalFilterHandler implements GlobalFilter {
 
     private final Logger logger = LoggerFactory.getLogger(GlobalFilterHandler.class);
 
